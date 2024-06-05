@@ -1,0 +1,35 @@
+
+
+
+<div class="chName">     
+    <input class="challengeName" [(ngModel)]="challenge.name" placeholder="Enter challenge name"/>
+    <!-- list each segment out in a for loop -->
+    <!-- when challenge.segments increase its length it will render out  -->
+</div>
+
+<div *ngFor="let segment of challenge.segments; let i = index">
+    
+    <input [(ngModel)]="segment.name" placeholder="Enter segment name"/>
+    <!-- match the id to the segment, when clicked - delete the index in challenge.segments array -->
+    <!-- cause ngFor rerender -->
+    <button (click)="handleDeleteSegment(i)">Delete Segment</button>
+</div>
+
+<div class="buttons">
+
+    <ul>
+
+        <!-- add an empty string to challenge.segments array -->
+        <!-- then the ngFor will appear the new input holder -->
+        <div>
+            <button (click)="handleAddSegment()"> Add segment </button>
+        </div>
+        <div>
+            <button (click)="handleAddChallenge()"> Add challenge</button>
+        </div>   
+        <div>
+            <button (click)="handleBackBtn()">Back</button>
+        </div>
+    </ul>
+</div>
+

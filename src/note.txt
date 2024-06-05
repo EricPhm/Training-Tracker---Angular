@@ -1,0 +1,186 @@
+to start: ng new my-app --no-standalone
+to run: ng serve
+
+module - like a dashboard, group code together
+- modules: big chunk of components
+    Core: -> App
+
+    Feature: -> 1.poke-admin
+                2.
+
+    Shared: -> services, components
+
+    Routing: -> routing
+
+
+    *Lazy loading: different module will only load when they being use 
+
+
+    ng genereate module pokemon
+
+    ng generate component pokemon/pokemon-list           if needed( --module=pokemon-dashboard.module.ts)
+    * need to add the export in the module in pokemon-dashboard
+    * need to add to the import in the module in app.module.ts
+
+components - reuseable components, render nested components, one way data flow, immutable
+    - string interpolation:
+    {{a}}
+
+    // in app.components.ts
+    @component({
+        link both of the html, css
+    })
+
+    export class AppComponent {
+        title: string;
+        numberOne: number = 1;
+        numberTwo: number = 2;
+
+
+        constructor() {
+            this.title = "teddy"
+        }
+    }
+
+    // in app.components.html
+    <router-outlet></router-outlet>
+    {{ title }} // output teddy on screen
+    {{ numberOne + numberTwo }} // output 3 on screen
+
+
+
+    - property binding: [] - in html it need to check for the property in html <image [src]  <- this need to equal to some source in .ts
+
+    - two way binding: [()] - data send up and data send down // keep data onscreen when type in - then clicked enter to save it to local storage
+        [] - data send down - data already
+        () - when hit button data send up
+        <input [(ngModel)]="favoriteAnimal" />
+
+        ngModel: do the hooking up and binding for data send up and down
+
+        import { formModules }
+
+    
+    - template reference variable: can share them with other html elements
+        <input #phone placeholder="phone number"/>
+        <button (clicked)="handleClick(phone)">Click me</button>
+
+
+    - ngClass: dynamically style 
+    // whenever icCool is true the pokemon with that id is automatically has blue background color
+        <td [class.cool-indicator]="pokemon.isCool'>{{ pokemon.id }}</td>
+        // in css
+        .cool-indicator {
+            background-color: blue;
+        }
+
+
+    - ngStyle: inline CSS style
+
+    - ngIf: coditional logic within html
+        <div *ngIf="hero" class="name">{{ her.name }} </div>
+
+    -ngFor: for loop
+        // in .ts
+        pokemons: Pokemon[] = [{
+                id:1,
+                name:"Pikachu",
+                type:'electric'
+            },
+            {
+                id:2,
+                name:"Chaleon",
+                type:'fire'
+            }
+        ]
+        // in html
+        <tr *ngFor="let pokemon of pokemons; let i = index">
+            <td> {{ i }} </td>
+            <td> {{ pokemon.name }} </td>
+            <td> {{ pokemon.tyoe }} </td>
+        </tr>
+
+
+    - Component
+
+    - Input() pass down to the detail component
+        Input()
+        detail!: Pokemon
+
+    - Output() pass up to the list component    -   emit: launch data up
+        Output()
+        remove: EventEmitter<any> = new EventEmitter()
+
+        onRemove(){
+            this.remove.emit(this.detail)
+        }
+
+directives - (sample: <p *ngIf==true/>) - control html
+
+
+pipes - turn ISO date to readable string
+
+
+services = in charge of API calls, dependency injection
+
+
+router - build in, handle url changes
+    - route snapshot: to use param in components
+    - routerLink: need to put the path in app-routing.module.ts
+
+
+interval() - rxjs
+    return the observable - emit infinite the amount of time
+    use that observable to subscribe so that it do sth on that amount of time
+
+
+setTimeout - runs a callback after a set amount of time you give it
+setInterval - runs a callback at the specified frequency you give it
+both - return an id that you can use to later clear (unschedule) it
+
+// ex: make a function that log "ping" once per second and pong "pong" once per second off set from "ping" half a second
+function pingPong() {
+    const intervalID = setInterval(() => {
+        console.log("ping")
+        setTimeout(() => {
+            console.log("pong")
+        }, 500)
+
+    }, 1000)
+    return () => { clearInterval((intervalID) }
+}
+
+Angular: 
+        components: is a path, it does not need routes as in react
+        does not need to use state to keep the render on screen (example: input)
+
+
+
+
+within the module folder in Anguler, each component has it's own folder, it follow the MVC structure
+all component is made for you example routing, translation, state
+- larger component
+- more specific code
+- harder to learn
+
+
+react:
+A component that is just a function that render HTML code directly
+using hooking
+freedom choice of library, 
+- more focused component
+- more reuseability - more focused more lightweight
+
+
+# AngularResearchProject
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+

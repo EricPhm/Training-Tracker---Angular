@@ -1,0 +1,23 @@
+
+.chName{
+    /* background-color: aquamarine; */
+    width: 100px;
+    border: 5px solid rgb(217, 226, 236);
+    border-radius: 25%;
+    padding: 5px;
+    margin: 20px;
+    /* text-align: justify; */
+    text-align: center;
+}
+
+button{
+    border-radius: 8px;
+    border: 2px solid color(srgb rgb(255, 255, 255) rgb(48, 56, 48) rgb(67, 67, 99));
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #7db6dd;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}

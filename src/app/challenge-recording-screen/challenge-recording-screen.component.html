@@ -1,0 +1,46 @@
+
+<div class="stopWatch">
+    <span>{{Org_hour}} : </span>
+    <span>{{Org_minute}} : </span>
+    <span>{{Org_second}}</span>
+</div>
+
+<div class="chName">{{challenge.name}}</div>
+
+<div class="segmentName" *ngFor="let segment of challenge.segments">
+
+    <div class="segment-StopWatch">
+        {{segment.name}}
+        <div>
+            <i *ngIf="nextIndex == segment.id; else elseBlock">
+                <span>{{Segment_hour}} : </span>
+                <span>{{Segment_minute}} : </span>
+                <span>{{Segment_second}}</span>            
+            </i>
+            <ng-template #elseBlock>
+                {{Segment_time[segment.id - 1]}}
+            </ng-template>
+
+        </div>
+
+    </div>
+</div>
+
+    
+<div *ngIf="!running">
+    <button (click)="handleStart()">Start</button>
+</div>
+
+<div *ngIf="running">
+    <div><button (click)="handlePause()">Pause</button></div>
+    <div><button (click)="handleNext()">Next</button></div>
+</div>
+
+<div *ngIf="endBtn">
+    <button (click)="handleEnd()">End</button>
+</div>
+
+
+
+
+<button (click)="handleBackBtn()">Back</button>

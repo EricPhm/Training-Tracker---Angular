@@ -1,0 +1,13 @@
+
+
+
+<div *ngFor="let ch of challenge; let i = index">
+
+    <div class="chName"> {{ ch.name }} 
+        <div>
+            <!-- add 1 because item id start at 1 -->
+            <button (click)="navigateRecording(i+1)">Record</button>
+        </div>
+    </div>
+</div>
+<button (click)="navigateCreateChallenge()">Create new challenge</button>
